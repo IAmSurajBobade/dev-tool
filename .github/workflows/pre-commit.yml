@@ -1,0 +1,54 @@
+name: Pre-commit and Version Update
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  create:
+    tags:
+      - 'v*'
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0  # Fetch all history for all tags and branches
+
+    - name: Run pre-commit checks
+      uses: pre-commit/action@v3.0.0
+
+    - name: Update version file
+      run: |
+        echo "Last updated: $(date -u)" > version.txt
+        echo "Branch: ${{ github.ref }}" >> version.txt
+        echo "Commit: ${{ github.sha }}" >> version.txt
+
+    - name: Update version.go on tag
+      if: startsWith(github.ref, 'refs/tags/')
+      run: |
+        TAG=${GITHUB_REF#refs/tags/}
+        echo "package backend" > backend/version.go
+        echo "" >> backend/version.go
+        echo "const Version = \"$TAG\"" >> backend/version.go
+        echo "const Date = \"$(date -u)\"" >> backend/version.go
+        echo "const Commit = \"${GITHUB_SHA}\"" >> backend/version.go
+
+    - name: Commit changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add version.txt backend/version.go
+        git commit -m "Update version information" || echo "No changes to commit"
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Push changes
+      if: success()
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}

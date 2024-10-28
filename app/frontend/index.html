@@ -102,6 +102,22 @@
                 });
             }
 
+        function copyToClipboard() {
+            const resultTextarea = document.getElementById('result');
+            resultTextarea.select();
+            resultTextarea.setSelectionRange(0, 99999); // For mobile devices
+
+            navigator.clipboard.writeText(resultTextarea.value)
+                .then(() => {
+                    // Optional: Provide user feedback
+                    alert("Copied to clipboard!");
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                    alert("Failed to copy. Please try again.");
+                });
+        }
+
             // Load home content by default
             showHome();
         </script>

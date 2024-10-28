@@ -18,7 +18,7 @@ jobs:
         fetch-depth: 0  # Fetch all history for all tags and branches
 
     - name: Run pre-commit checks
-      uses: pre-commit/action@v3.0.0
+      uses: pre-commit/action@v3.0.1
 
     - name: Update version file
       run: |

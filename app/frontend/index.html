@@ -63,6 +63,23 @@
                 color: var(--text-color);
                 border: 1px solid var(--text-color);
             }
+            #notification {
+                display: none;
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: #4CAF50;
+                color: white;
+                padding: 7px 10px;
+                border-radius: 5px;
+                font-size: 10px;
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out;
+                z-index: 1000;
+            }
+
+
         </style>
     </head>
 
@@ -102,21 +119,37 @@
                 });
             }
 
-        function copyToClipboard() {
-            const resultTextarea = document.getElementById('result');
-            resultTextarea.select();
-            resultTextarea.setSelectionRange(0, 99999); // For mobile devices
+            function copyToClipboard() {
+                const resultTextarea = document.getElementById('result');
+                resultTextarea.select();
+                resultTextarea.setSelectionRange(0, 99999);
 
-            navigator.clipboard.writeText(resultTextarea.value)
+                navigator.clipboard.writeText(resultTextarea.value)
                 .then(() => {
-                    // Optional: Provide user feedback
-                    alert("Copied to clipboard!");
+                    showNotification("Copied to clipboard!");
                 })
                 .catch(err => {
                     console.error('Failed to copy: ', err);
-                    alert("Failed to copy. Please try again.");
+                    showNotification("Failed to copy. Please try again.");
                 });
-        }
+            }
+
+            function showNotification(message) {
+                const notification = document.getElementById('notification');
+                notification.textContent = message;
+                notification.style.display = 'block';
+
+                setTimeout(() => {
+                    notification.style.opacity = '1';
+                    notification.style.transition = 'opacity 0.7s ease-in-out';
+                    setTimeout(() => {
+                        notification.style.opacity = '0';
+                        setTimeout(() => {
+                            notification.style.display = 'none';
+                        }, 500);
+                    }, 2000);
+                }, 100);
+            }
 
             // Load home content by default
             showHome();

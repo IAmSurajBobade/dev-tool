@@ -49,6 +49,7 @@ func (a *App) HandleBase64() string {
             <textarea id="result" readonly rows="5" style="width: 100%; background-color: #444; color: #fff; border: 1px solid #666; padding: 5px;"></textarea>
         </div>
         <button onclick="copyToClipboard()">Copy to Clipboard</button>
+        <div id="notification" style="display: none;"></div>
     `
 }
 

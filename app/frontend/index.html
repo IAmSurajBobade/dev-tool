@@ -91,14 +91,14 @@
             function encodeBase64() {
                 const input = document.getElementById('input').value;
                 window.go.main.App.HandleBase64Encode(input).then(result => {
-                    document.getElementById('output').innerHTML = result;
+                    document.getElementById('result').value = result;
                 });
             }
 
             function decodeBase64() {
                 const input = document.getElementById('input').value;
                 window.go.main.App.HandleBase64Decode(input).then(result => {
-                    document.getElementById('output').innerHTML = result;
+                    document.getElementById('result').value = result;
                 });
             }
 

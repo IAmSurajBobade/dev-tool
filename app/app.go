@@ -45,21 +45,23 @@ func (a *App) HandleBase64() string {
         <textarea id="input" placeholder="Enter text here"></textarea>
         <button onclick="encodeBase64()">Encode</button>
         <button onclick="decodeBase64()">Decode</button>
-        <div id="output"></div>
+        <div id="output">
+            <textarea id="result" readonly rows="5" style="width: 100%; background-color: #444; color: #fff; border: 1px solid #666; padding: 5px;"></textarea>
+        </div>
     `
 }
 
 // HandleBase64Encode encodes the input to Base64
 func (a *App) HandleBase64Encode(input string) string {
 	encoded := base64.StdEncoding.EncodeToString([]byte(input))
-	return fmt.Sprintf("<p>Encoded: %s</p>", encoded)
+	return encoded
 }
 
 // HandleBase64Decode decodes the input from Base64
 func (a *App) HandleBase64Decode(input string) string {
 	decoded, err := base64.StdEncoding.DecodeString(input)
 	if err != nil {
-		return fmt.Sprintf("<p>Error: %s</p>", err.Error())
+		return fmt.Sprintf("Error: %s", err.Error())
 	}
-	return fmt.Sprintf("<p>Decoded: %s</p>", string(decoded))
+	return string(decoded)
 }

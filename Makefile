@@ -1,4 +1,9 @@
 # Start app in development mode
 dev:
-	cd app
-    wails dev
+	wails dev
+
+build:
+	wails build
+
+buildw:
+	wails build -platform windows/386

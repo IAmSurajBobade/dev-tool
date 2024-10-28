@@ -7,6 +7,14 @@ export function HandleBase64Decode(arg1:string):Promise<string>;
 
 export function HandleBase64Encode(arg1:string):Promise<string>;
 
+export function HandleCryptRSA():Promise<string>;
+
 export function HandleGreet():Promise<string>;
 
 export function HandleHome():Promise<string>;
+
+export function HandleRSADecrypt(arg1:string,arg2:string):Promise<string>;
+
+export function HandleRSAEncrypt(arg1:string,arg2:string):Promise<string>;
+
+export function HandleRSAGenerateKeyPair():Promise<string>;

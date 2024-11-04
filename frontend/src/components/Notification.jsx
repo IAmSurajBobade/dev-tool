@@ -1,4 +1,4 @@
-import "../Notification.css";
+import "../css/Notification.css";
 
 function Notification({ message }) {
   return <div className="notification">{message}</div>;

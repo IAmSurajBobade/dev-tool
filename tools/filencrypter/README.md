@@ -1,6 +1,6 @@
 # FileCrypt
 
-FileCrypt is a command-line tool to encrypt and decrypt image and video files in a specified folder using strong encryption.
+FileCrypt is a command-line tool to encrypt and decrypt any file format in a specified folder using strong encryption.
 
 ## Usage
 
@@ -17,18 +17,12 @@ filecrypt <encrypt|decrypt> <folder> <password>
 To encrypt all image and video files in the media folder with the password mysecretpassword:
 
 ``` sh
-filecrypt encrypt media mysecretpassword
+filecrypt encrypt /path/to/folder mysecretpassword
 ```
 
 To decrypt all encrypted files in the media folder with the password mysecretpassword:
 
 ``` sh
-filecrypt decrypt media mysecretpassword
+filecrypt decrypt /path/to/folder mysecretpassword
 ```
 
-## Supported File Types
-
-- jpg
-- png
-- mp4
-- mov

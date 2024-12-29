@@ -29,3 +29,6 @@ go.work.sum
 app/build/bin
 app/node_modules
 app/frontend/dist
+
+# test data
+assets/testdata
